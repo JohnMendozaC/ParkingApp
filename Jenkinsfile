@@ -25,19 +25,15 @@ pipeline {
 	stage('Build') {
             steps{
 				echo "------------>Build<------------"
-                dir ('ParkingApp/'){
                     sh './gradlew clean build'
-                }
             }
         }
 
 		stage('Unit Tests') {
 			steps{
 				echo "------------>Unit Tests<------------"
-				dir ('ParkingApp/'){
 					sh './gradlew --b build.gradle test --scan'
 					sh './gradlew --b build.gradle jacocoTestReport'
-				}
 			}
 		}
 
