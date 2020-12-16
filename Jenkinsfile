@@ -16,7 +16,7 @@ pipeline {
         stage('Checkout'){
             steps{
                 echo "------------>Checkout<------------"
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GitHub_JohnMendozaC', url:'https://github.com/JohnMendozaC/ParkingApp.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GitHub_JohnMendozaC', url:'https://github.com/JohnMendozaC/ParkingApp.git']]])
                 sh 'chmod +x ParkingApp/gradlew'
             }
         }
