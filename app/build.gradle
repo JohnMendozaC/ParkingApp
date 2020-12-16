@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'jacoco'
 }
 
 android {
@@ -21,8 +22,18 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            testCoverageEnabled true
         }
     }
+
+    testOptions {
+        execution 'ANDROID_TEST_ORCHESTRATOR'
+        animationsDisabled true
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -32,7 +43,19 @@ android {
     }
 }
 
+jacoco {
+    toolVersion = '0.8.1' //Use latest version
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
+
 dependencies {
+
+//    classpath 'com.android.tools.build:gradle:3.0.1'
+//    classpath 'org.jacoco:org.jacoco.core:0.8.1' //Use latest version
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'
