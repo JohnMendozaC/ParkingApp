@@ -27,11 +27,8 @@ android {
     }
 
     testOptions {
-        execution 'ANDROID_TEST_ORCHESTRATOR'
-        animationsDisabled true
-        unitTests {
-            includeAndroidResources = true
-        }
+        reportDir "$rootDir/test-reports"
+        resultsDir "$rootDir/test-results"
     }
 
     compileOptions {
