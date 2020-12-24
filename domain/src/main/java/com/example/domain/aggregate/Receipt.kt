@@ -10,19 +10,22 @@ import com.example.domain.util.ConvertDate
 import com.example.domain.valueobject.Vehicle
 import java.util.*
 
-class Receipt {
+class Receipt(newEntryDate: Long, newVehicle: Vehicle, validatePlate: Boolean) {
 
-    var vehicle: Vehicle? = null
+    var vehicle: Vehicle = newVehicle
         private set
-    var entryDate: Long = 0
-        private set
-    var departureDate: Long = 0
+    var entryDate: Long = newEntryDate
         private set
     var amount: Double? = null
         private set
+    var departureDate: Long = 0
+        set(value) {
+            field = value
+            calculateAmount()
+        }
 
-    constructor(newEntryDate: Long, newVehicle: Vehicle) {
-        if (newVehicle.plateIsInitA()) {
+    init {
+        if (newVehicle.plateIsInitA() && validatePlate) {
             val c = Calendar.getInstance()
             c.timeInMillis = newEntryDate
             val day = c.get(Calendar.DAY_OF_WEEK)
@@ -30,15 +33,6 @@ class Receipt {
                 throw CanNotEnterVehicleException()
             }
         }
-        entryDate = newEntryDate
-        vehicle = newVehicle
-    }
-
-    constructor(newEntryDate: Long, newDepartureDate: Long, newVehicle: Vehicle) {
-        entryDate = newEntryDate
-        vehicle = newVehicle
-        departureDate = newDepartureDate
-        calculateAmount()
     }
 
     private fun calculateAmount() {
@@ -73,7 +67,7 @@ class Receipt {
                 priceDay
             }
             else -> {
-                val result = (hours / Time.MAX_HOUR.value.toFloat())
+                val result = (hours / Time.DAY_HOUR.value.toFloat())
                 val days = result.toInt()
                 val newHours = (result.dec() * Time.DAY_HOUR.value)
                 (days * priceDay) + (newHours * priceHour)

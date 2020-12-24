@@ -15,7 +15,7 @@ class ReceiptService @Inject constructor(private val receiptRepository: ReceiptR
     @ExperimentalCoroutinesApi
     fun enterVehicle(entryDate: Long, vehicle: Vehicle): Flow<Resource<String>> {
         val flow = flow {
-            val receipt = Receipt(entryDate, vehicle)
+            val receipt = Receipt(entryDate, vehicle, true)
             if (receiptRepository.isSpaceForVehicle(vehicle)) {
                 emit(Resource.loading(null, "Saving data in database..."))
                 emit(Resource.success(receiptRepository.enterVehicle(receipt).toString()))
@@ -38,30 +38,34 @@ class ReceiptService @Inject constructor(private val receiptRepository: ReceiptR
             .flowOn(Dispatchers.IO)
     }
 
-  /*  @ExperimentalCoroutinesApi
-    fun enterVehicle(entryDate: Long, vehicle: Vehicle): Flow<Resource<Double>> {
+    @ExperimentalCoroutinesApi
+    fun takeOutVehicle(departureDate: Long, receipt: Receipt): Flow<Resource<Double>> {
         val flow = flow {
-            val receipt = Receipt(entryDate, vehicle)
-            if (receiptRepository.isSpaceForVehicle(vehicle)) {
-                emit(Resource.loading(null, "Saving data in database..."))
-                emit(Resource.success(0.0))
-            } else {
-                emit(Resource.error(null, 0, "No hay cupo para guardar el carro."))
-            }
+            emit(Resource.loading(null, "Deleting data in database..."))
+            receiptRepository.takeOutVehicle(receipt)
+            receipt.departureDate = departureDate
+            emit(Resource.success(receipt.amount))
         }
+        return flow
+            .onStart { emit(Resource.loading(null, "Loading from database...")) }
+            .catch {
+                emit(Resource.error(null, 0, "Oh oh ocurrio algo inesperado!"))
+            }
+            .flowOn(Dispatchers.IO)
+    }
 
+    @ExperimentalCoroutinesApi
+    fun getVehicles(): Flow<Resource<List<Receipt>>> {
+        val flow = flow {
+            emit(Resource.loading(null, "Looking data in database..."))
+            emit(Resource.success(receiptRepository.getVehicles()))
+        }
         return flow
             .onStart { emit(Resource.loading(null, "Loading from database...")) }
             .catch { exception ->
-                with(exception) {
-                    val msg = when (this) {
-                        is SQLiteConstraintException -> "El vehiculo ya se encuentra en el parqueadero."
-                        else -> *//*"Oh oh ocurrio algo inesperado!"*//*message
-                    }
-                    emit(Resource.error(null, 0, msg))
-                }
+                emit(Resource.error(null, 0, "Oh oh ocurrio algo inesperado!"))
             }
             .flowOn(Dispatchers.IO)
-    }*/
+    }
 
 }

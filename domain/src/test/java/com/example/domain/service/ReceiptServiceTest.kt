@@ -20,10 +20,10 @@ class ReceiptServiceTest {
         //Arrange
         val entryVehicle = System.currentTimeMillis() //- (24 * 3600000)
         val vehicle = Motorcycle("BJO90F", 150)
-//        val motorcycle = Receipt(entryVehicle, vehicle)
+        val motorcycle = Receipt(entryVehicle, vehicle, true)
 
         //Act
-        receiptRepository.enterMotorcycle(vehicle)
+        receiptRepository.enterVehicle(motorcycle)
     }
 
     @Test

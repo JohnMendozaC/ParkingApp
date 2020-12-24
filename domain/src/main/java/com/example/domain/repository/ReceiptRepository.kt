@@ -10,4 +10,6 @@ interface ReceiptRepository {
     fun enterVehicle(receipt: Receipt): Long
 
     fun takeOutVehicle(receipt: Receipt): Int
+
+    fun getVehicles(): List<Receipt>
 }

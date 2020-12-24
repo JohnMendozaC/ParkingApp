@@ -6,6 +6,7 @@ import com.example.domain.entity.Motorcycle
 import com.example.domain.enum.Parking
 import com.example.domain.repository.ReceiptRepository
 import com.example.infrastructure.dblocal.daos.ReceiptDao
+import com.example.infrastructure.dblocal.dto.toDomainModel
 import com.example.infrastructure.dblocal.dto.toReceiptEntity
 import com.example.infrastructure.dblocal.enums.VehicleType
 import javax.inject.Inject
@@ -30,5 +31,9 @@ class ReceiptRepositoryImpl @Inject constructor(
 
     override fun takeOutVehicle(receipt: Receipt): Int {
         return receiptDao.deleteReceipt(receipt.toReceiptEntity())
+    }
+
+    override fun getVehicles(): List<Receipt> {
+        return receiptDao.getVehicles().toDomainModel()
     }
 }

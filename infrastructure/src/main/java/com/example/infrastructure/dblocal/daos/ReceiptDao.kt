@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.infrastructure.dblocal.entitys.ReceiptEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ReceiptDao {
@@ -17,4 +18,7 @@ interface ReceiptDao {
 
     @Delete
     fun deleteReceipt(receiptEntity: ReceiptEntity): Int
+
+    @Query("SELECT * FROM receipt")
+    fun getVehicles(): List<ReceiptEntity>
 }
