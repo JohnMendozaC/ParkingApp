@@ -1,2 +1,4 @@
+include ':infrastructure'
+include ':domain'
 include ':app'
 rootProject.name = "ParkingApp"
