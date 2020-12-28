@@ -40,7 +40,7 @@ pipeline {
 		stage('UI Tests') {
             steps{
                 echo "------------>UI Tests<------------"
-                    sh './gradlew --b build.gradle androidTest --scan'
+                    sh './gradlew --b build.gradle app:connectedAndroidTest --scan'
                     sh './gradlew --b build.gradle jacocoTestReport'
             }
         }
