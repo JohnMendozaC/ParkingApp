@@ -37,6 +37,14 @@ pipeline {
 			}
 		}
 
+		stage('UI Tests') {
+            steps{
+                echo "------------>UI Tests<------------"
+                    sh './gradlew --b build.gradle androidTest --scan'
+                    sh './gradlew --b build.gradle jacocoTestReport'
+            }
+        }
+
         stage('Static Code Analysis') {
             steps{
 				echo "------------>Static Code Analysis<------------"
