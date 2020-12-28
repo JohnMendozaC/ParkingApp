@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_parking"
+    app:startDestination="@id/vehicleListFragment">
+
+    <fragment
+        android:id="@+id/vehicleListFragment"
+        android:name="com.example.parkingapp.fragments.VehicleListFragment"
+        android:label="VehicleListFragment">
+        <action
+            android:id="@+id/action_vehicleListFragment_to_addVehicleDialogFragment"
+            app:destination="@id/addVehicleDialogFragment" />
+        <action
+            android:id="@+id/action_vehicleListFragment_to_outVehicleDialogFragment"
+            app:destination="@id/outVehicleDialogFragment" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/addVehicleDialogFragment"
+        android:name="com.example.parkingapp.fragments.AddVehicleDialogFragment"
+        android:label="AddVehicleDialogFragment" >
+        <action
+            android:id="@+id/action_addVehicleDialogFragment_pop"
+            app:popUpTo="@id/addVehicleDialogFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/outVehicleDialogFragment"
+        android:name="com.example.parkingapp.fragments.OutVehicleDialogFragment"
+        android:label="OutVehicleDialogFragment" >
+        <action
+            android:id="@+id/action_outVehicleDialogFragment_pop"
+            app:popUpTo="@id/outVehicleDialogFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
+
+</navigation>

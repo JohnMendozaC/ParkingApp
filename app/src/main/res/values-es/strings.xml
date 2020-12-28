@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_vehicle">Ingresar vehiculo al parqueadero</string>
+    <string name="enter_date">Ingrese Fecha…</string>
+    <string name="enter_time">Ingrese hora…</string>
+    <string name="enter_plate">Ingrese placa:</string>
+    <string name="take_out_plate">Take vehicle out of the parking lot</string>
+    <string name="example_plate">AJU95F</string>
+    <string name="car">Carro</string>
+    <string name="motorcycle">Moto</string>
+    <string name="enter_vehicle">Ingresar vehiculo</string>
+    <string name="type_of_vehicle">Tipo de vehiculo:</string>
+    <string name="departure_time">Departure time</string>
+    <string name="pay_parking">Pay parking</string>
+    <string name="check_in_time">Hora de ingreso</string>
+    <string name="entry_cylinder_capacity">Ingresar cilidraje</string>
+    <string name="not_vehicles">No hay vehiculos en el parqueadero</string>
+    <string name="error">¡Ocurrio algo inesperado!</string>
+    <string name="decline">Cancelar</string>
+    <string name="error_data">Faltan datos por llenar.</string>
+    <string name="confirm">Confirmar</string>
+    <string name="info">Info.</string>
+    <string name="error_date">La fecha ingresada no es valida para poder sacar el vehiculo.</string>
+    <string name="amount_to_pay">El valor a pagar por el parqueo es de: %1$s</string>
+    <string name="date_to">Fecha: %1$s</string>
+    <string name="time_to">Hora: %1$s</string>
+</resources>

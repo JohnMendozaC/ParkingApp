@@ -9,6 +9,8 @@ import com.example.infrastructure.dblocal.daos.ReceiptDao
 import com.example.infrastructure.dblocal.dto.toDomainModel
 import com.example.infrastructure.dblocal.dto.toReceiptEntity
 import com.example.infrastructure.dblocal.enums.VehicleType
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,12 +27,12 @@ class ReceiptRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun enterVehicle(receipt: Receipt): Long {
-        return receiptDao.insertReceipt(receipt.toReceiptEntity())
+    override fun enterVehicle(receipt: Receipt): Flow<Long> {
+        return flow { emit(receiptDao.insertReceipt(receipt.toReceiptEntity())) }
     }
 
-    override fun takeOutVehicle(receipt: Receipt): Int {
-        return receiptDao.deleteReceipt(receipt.toReceiptEntity())
+    override fun takeOutVehicle(receipt: Receipt): Flow<Int> {
+        return flow { emit(receiptDao.deleteReceipt(receipt.vehicle.plate)) }
     }
 
     override fun getVehicles(): List<Receipt> {

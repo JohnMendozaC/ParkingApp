@@ -18,7 +18,13 @@ class ReceiptService @Inject constructor(private val receiptRepository: ReceiptR
             val receipt = Receipt(entryDate, vehicle, true)
             if (receiptRepository.isSpaceForVehicle(vehicle)) {
                 emit(Resource.loading(null, "Saving data in database..."))
-                emit(Resource.success(receiptRepository.enterVehicle(receipt).toString()))
+                receiptRepository.enterVehicle(receipt).collect { response ->
+                    if (response > 0L) {
+                        emit(Resource.success("Ok",200,"¡Se guardo el vehiculo con exito!"))
+                    } else {
+                        emit(Resource.error(null, 0, "Oh oh ocurrio algo inesperado!"))
+                    }
+                }
             } else {
                 emit(Resource.error(null, 0, "No hay cupo para guardar el carro."))
             }
@@ -42,9 +48,14 @@ class ReceiptService @Inject constructor(private val receiptRepository: ReceiptR
     fun takeOutVehicle(departureDate: Long, receipt: Receipt): Flow<Resource<Double>> {
         val flow = flow {
             emit(Resource.loading(null, "Deleting data in database..."))
-            receiptRepository.takeOutVehicle(receipt)
-            receipt.departureDate = departureDate
-            emit(Resource.success(receipt.amount))
+            receiptRepository.takeOutVehicle(receipt).collect { response ->
+                if (response > 0) {
+                    receipt.departureDate = departureDate
+                    emit(Resource.success(receipt.amount))
+                } else {
+                    emit(Resource.error(null, 0, "Oh oh ocurrio algo inesperado!"))
+                }
+            }
         }
         return flow
             .onStart { emit(Resource.loading(null, "Loading from database...")) }

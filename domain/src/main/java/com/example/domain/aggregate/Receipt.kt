@@ -7,10 +7,12 @@ import com.example.domain.enum.Time
 import com.example.domain.exception.CalculateAmountException
 import com.example.domain.exception.CanNotEnterVehicleException
 import com.example.domain.util.ConvertDate
+import com.example.domain.util.ConvertDate.convertLongToTime
 import com.example.domain.valueobject.Vehicle
+import java.io.Serializable
 import java.util.*
 
-class Receipt(newEntryDate: Long, newVehicle: Vehicle, validatePlate: Boolean) {
+class Receipt(newEntryDate: Long, newVehicle: Vehicle, validatePlate: Boolean) : Serializable {
 
     var vehicle: Vehicle = newVehicle
         private set
@@ -74,5 +76,8 @@ class Receipt(newEntryDate: Long, newVehicle: Vehicle, validatePlate: Boolean) {
             }
         }
     }
-}
 
+    fun getEntryDateS() = entryDate.convertLongToTime()
+
+    fun getDepartureDateS() = departureDate.convertLongToTime()
+}

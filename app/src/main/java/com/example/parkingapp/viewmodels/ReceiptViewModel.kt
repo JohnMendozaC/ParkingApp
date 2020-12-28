@@ -19,7 +19,7 @@ class ReceiptViewModel @ViewModelInject constructor(
     fun takeOutVehicle(departureDate: Long, receipt: Receipt): LiveData<Resource<Double>> =
         receiptService.takeOutVehicle(departureDate, receipt).asLiveData()
 
-    val vehicles: LiveData<Resource<List<Receipt>>> =
+    fun getVehicles(): LiveData<Resource<List<Receipt>>> =
         receiptService.getVehicles().asLiveData()
 
 }

@@ -1,3 +1,31 @@
 <resources>
-    <string name="app_name">ParkingApp</string>
+    <string name="app_name" translatable="false">ParkingApp</string>
+    //validate
+    <string name="alpha_numeric" translatable="false">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789</string>
+    <string name="numeric" translatable="false">0123456789</string>
+    <string name="add_vehicle">Enter vehicle to parking lot</string>
+    <string name="enter_date">Entry date…</string>
+    <string name="enter_time">Entry time…</string>
+    <string name="enter_plate">Entry plate:</string>
+    <string name="take_out_plate">Take vehicle out of the parking lot</string>
+    <string name="example_plate">AJU95F</string>
+    <string name="car">Car</string>
+    <string name="motorcycle">Motorcycle</string>
+    <string name="enter_vehicle">Entry vehicle</string>
+    <string name="type_of_vehicle">Type of vehicle:</string>
+    <string name="departure_time">Departure time</string>
+    <string name="pay_parking">Pay parking</string>
+    <string name="check_in_time">Check-in time</string>
+    <string name="entry_cylinder_capacity">Entry cylinder capacity:</string>
+    <string name="_150_cc" translatable="false">150 cc</string>
+    <string name="not_vehicles">No hay vehiculos en el parqueadero</string>
+    <string name="error">¡Ocurrio algo inesperado!</string>
+    <string name="decline">Cancelar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="info">Info.</string>
+    <string name="error_data">Faltan datos por llenar.</string>
+    <string name="error_date">La fecha ingresada no es valida para poder sacar el vehiculo.</string>
+    <string name="amount_to_pay">El valor a pagar por el parqueo es de: %1$s</string>
+    <string name="date_to">Fecha: %1$s</string>
+    <string name="time_to">Hora: %1$s</string>
 </resources>
