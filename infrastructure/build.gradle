@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'jacoco'
 }
 
 android {
@@ -32,6 +33,18 @@ android {
 
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+}
+
+jacoco {
+    toolVersion = '0.8.1'
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: "testDebugUnitTest") {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+    reports {
+        xml.enabled = true
     }
 }
 
