@@ -78,7 +78,6 @@ task jacocoTestReport(type: JacocoReport, dependsOn: "testDebugUnitTest") {
     }
 }
 
-
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
