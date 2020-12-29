@@ -24,4 +24,5 @@
     <string name="amount_to_pay">El valor a pagar por el parqueo es de: %1$s</string>
     <string name="date_to">Fecha: %1$s</string>
     <string name="time_to">Hora: %1$s</string>
+    <string name="loading_db">\"Loading from database...\"</string>
 </resources>
