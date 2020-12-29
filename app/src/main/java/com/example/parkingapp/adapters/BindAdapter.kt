@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.aggregate.Receipt
 import com.example.domain.entity.Car
 import com.example.domain.entity.Motorcycle
-import com.example.domain.enum.Parking
-import com.example.domain.valueobject.Vehicle
+import com.example.domain.enums.Parking
+import com.example.domain.entity.Vehicle
 import com.example.parkingapp.R
 
 @BindingAdapter("isVisible")

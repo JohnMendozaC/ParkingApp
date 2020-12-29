@@ -1,6 +1,5 @@
 package com.example.parkingapp.fragments
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.Dialog
@@ -17,9 +16,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.domain.entity.Car
 import com.example.domain.entity.Motorcycle
-import com.example.domain.enum.Status
+import com.example.domain.enums.Status
 import com.example.domain.util.ConvertDate.getLongDate
-import com.example.domain.valueobject.Vehicle
+import com.example.domain.entity.Vehicle
 import com.example.parkingapp.R
 import com.example.parkingapp.databinding.DialogFragmentAddVehicleBinding
 import com.example.parkingapp.viewmodels.ReceiptViewModel
@@ -62,7 +61,6 @@ class AddVehicleDialogFragment : DialogFragment() {
         clicksProcessing()
     }
 
-    @SuppressLint("SetTextI18n")
     private fun clicksEntry() {
         with(binding) {
             topAppBar.setNavigationOnClickListener {
@@ -73,7 +71,10 @@ class AddVehicleDialogFragment : DialogFragment() {
                 DatePickerDialog(
                     requireContext(),
                     OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-                        etDate.text = "Fecha: ${dayOfMonth}/${(monthOfYear + 1)}/${year}"
+                        etDate.text = resources.getString(
+                            R.string.date_to,
+                            "${dayOfMonth}/${(monthOfYear + 1)}/${year}"
+                        )
                         etDate.tag = "${dayOfMonth}/${(monthOfYear + 1)}/${year}"
                     }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)
                 ).show()
@@ -83,7 +84,7 @@ class AddVehicleDialogFragment : DialogFragment() {
                 TimePickerDialog(
                     requireContext(),
                     OnTimeSetListener { _, hourOfDay, minute ->
-                        etTime.text = "Hora: $hourOfDay:$minute"
+                        etTime.text = resources.getString(R.string.time_to, "$hourOfDay:$minute")
                         etTime.tag = "$hourOfDay:$minute"
                     },
                     c[Calendar.HOUR_OF_DAY],
@@ -146,7 +147,7 @@ class AddVehicleDialogFragment : DialogFragment() {
                         binding.loaderAddVehicle.isLoading = false
                         MaterialAlertDialogBuilder(requireContext())
                             .setTitle(resources.getString(R.string.info))
-                            .setMessage(result.message)
+                            .setMessage(result.data)
                             .setPositiveButton(resources.getString(R.string.confirm)) { _, _ ->
                                 (arguments?.get("refreshList") as VehicleListRefresh?)?.refreshList()
                                 findNavController(this@AddVehicleDialogFragment)

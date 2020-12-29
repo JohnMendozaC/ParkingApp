@@ -1,14 +1,12 @@
 package com.example.domain.aggregate
 
+import com.example.domain.entity.Car
 import com.example.domain.entity.Motorcycle
-import com.example.domain.enum.Parking
-import com.example.domain.enum.Prices
-import com.example.domain.enum.Time
 import com.example.domain.exception.CalculateAmountException
 import com.example.domain.exception.CanNotEnterVehicleException
 import com.example.domain.util.ConvertDate
 import com.example.domain.util.ConvertDate.convertLongToTime
-import com.example.domain.valueobject.Vehicle
+import com.example.domain.entity.Vehicle
 import java.io.Serializable
 import java.util.*
 
@@ -38,46 +36,15 @@ class Receipt(newEntryDate: Long, newVehicle: Vehicle, validatePlate: Boolean) :
     }
 
     private fun calculateAmount() {
+        val hours = ConvertDate.getCheckInAndCheckOutTimes(entryDate, departureDate)
         amount = when (vehicle) {
-            is com.example.domain.entity.Car -> calculateAmountCar()
-            is Motorcycle -> calculateAmountMotorcycle(vehicle as Motorcycle)
+            is Car -> (vehicle as Car).calculateAmountCar(hours)
+            is Motorcycle -> (vehicle as Motorcycle).calculateAmountMotorcycle(hours)
             else -> throw CalculateAmountException()
         }
     }
 
-    private fun calculateAmountCar(): Double {
-        return calculateAmountDependentDayOrHour(Prices.CAR.hour, Prices.CAR.day)
-    }
+    fun getEntryDateString() = entryDate.convertLongToTime()
 
-    private fun calculateAmountMotorcycle(motorcycle: Motorcycle): Double {
-        var amount = calculateAmountDependentDayOrHour(
-            Prices.MOTORCYCLE.hour,
-            Prices.MOTORCYCLE.day
-        )
-        if (motorcycle.cylinderCapacity > Parking.MAX_CYLINDER_MOTORCYCLE.value)
-            amount += Prices.MOTORCYCLE.additionalAmount
-        return amount
-    }
-
-    private fun calculateAmountDependentDayOrHour(priceHour: Double, priceDay: Double): Double {
-        val hours = ConvertDate.getCheckInAndCheckOutTimes(entryDate, departureDate)
-        return when {
-            (hours < Time.MAX_HOUR.value) -> {
-                hours * priceHour
-            }
-            (hours in Time.MAX_HOUR.value..Time.DAY_HOUR.value) -> {
-                priceDay
-            }
-            else -> {
-                val result = (hours / Time.DAY_HOUR.value.toFloat())
-                val days = result.toInt()
-                val newHours = (result.dec() * Time.DAY_HOUR.value)
-                (days * priceDay) + (newHours * priceHour)
-            }
-        }
-    }
-
-    fun getEntryDateS() = entryDate.convertLongToTime()
-
-    fun getDepartureDateS() = departureDate.convertLongToTime()
+    fun getDepartureDateString() = departureDate.convertLongToTime()
 }

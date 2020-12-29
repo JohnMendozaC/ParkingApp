@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import com.example.domain.enum.Status
+import com.example.domain.enums.Status
 import com.example.parkingapp.R
 import com.example.parkingapp.adapters.VehicleAdapter
 import com.example.parkingapp.databinding.FragmentVehicleListBinding

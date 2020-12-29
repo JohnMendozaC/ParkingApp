@@ -1,7 +1,6 @@
 package com.example.domain.util
 
-import android.annotation.SuppressLint
-import com.example.domain.enum.Time
+import com.example.domain.enums.Time
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -13,17 +12,16 @@ object ConvertDate {
         return (result / Time.MILLS_HOUR.value).toInt()
     }
 
-    @SuppressLint("SimpleDateFormat")
+
     fun Long.convertLongToTime(): String {
         val date = Date(this)
-        val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
+        val format = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
         return format.format(date)
     }
 
-    @SuppressLint("SimpleDateFormat")
     fun String.getLongDate(): Long =
         try {
-            val d: Date? = SimpleDateFormat("dd/MM/yyyy HH:mm").parse(this)
+            val d: Date? = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).parse(this)
             d?.time ?: 0
         } catch (e: ParseException) {
             e.printStackTrace()

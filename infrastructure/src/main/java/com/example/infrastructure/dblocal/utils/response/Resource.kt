@@ -1,6 +1,6 @@
-package com.example.domain.util
+package com.example.infrastructure.dblocal.utils.response
 
-import com.example.domain.enum.Status
+import com.example.domain.enums.Status
 
 data class Resource<out T>(val status: Status, val data: T?, val code: Int?, val message: String?) {
     companion object {

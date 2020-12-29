@@ -1,4 +1,4 @@
-package com.example.domain.enum
+package com.example.domain.enums
 
 enum class Time(val value: Int) {
     MAX_HOUR(9),

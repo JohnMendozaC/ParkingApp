@@ -1,16 +1,14 @@
 package com.example.domain.repository
 
 import com.example.domain.aggregate.Receipt
-import com.example.domain.valueobject.Vehicle
-import kotlinx.coroutines.flow.Flow
 
 interface ReceiptRepository {
 
-    fun isSpaceForVehicle(vehicle: Vehicle): Boolean
+    fun getQuantityOfVehicles(typeVehicle: Int): Int
 
-    fun enterVehicle(receipt: Receipt): Flow<Long>
+    fun enterVehicle(receipt: Receipt): Long
 
-    fun takeOutVehicle(receipt: Receipt): Flow<Int>
+    fun takeOutVehicle(receipt: Receipt): Int
 
     fun getVehicles(): List<Receipt>
 }

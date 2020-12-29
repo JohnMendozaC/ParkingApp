@@ -13,7 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import com.example.domain.aggregate.Receipt
-import com.example.domain.enum.Status
+import com.example.domain.enums.Status
 import com.example.domain.util.ConvertDate.getLongDate
 import com.example.parkingapp.R
 import com.example.parkingapp.databinding.DialogFragmentOutVehicleBinding

@@ -4,10 +4,6 @@ import com.example.domain.aggregate.Receipt
 import com.example.domain.entity.Car
 import com.example.domain.entity.Motorcycle
 import com.example.domain.repository.ReceiptRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -28,13 +24,10 @@ class ReceiptServiceTest {
         val motorcycle = Receipt(entryVehicle, vehicle, true)
 
         //Act
-        GlobalScope.launch(Dispatchers.IO) {
-            receiptRepository.enterVehicle(motorcycle).collect {
-                //Assert
-                val expected = (it > 0)
-                assert(expected)
-            }
-        }
+        val expected = (receiptRepository.enterVehicle(motorcycle) >= 0)
+
+        //Assert
+        assert(expected)
     }
 
     @Test
@@ -45,13 +38,10 @@ class ReceiptServiceTest {
         val motorcycle = Receipt(entryVehicle, vehicle, true)
 
         //Act
-        GlobalScope.launch(Dispatchers.IO) {
-            receiptRepository.enterVehicle(motorcycle).collect {
-                //Assert
-                val expected = (it > 0)
-                assert(expected)
-            }
-        }
+        val expected = (receiptRepository.enterVehicle(motorcycle) >= 0)
+
+        //Assert
+        assert(expected)
     }
 
     @Test
@@ -63,12 +53,9 @@ class ReceiptServiceTest {
         motorcycle.departureDate = 1608915389051 // 24/12/2020 8 AM + 27 hours
 
         //Act
-        GlobalScope.launch(Dispatchers.IO) {
-            receiptRepository.takeOutVehicle(motorcycle).collect {
-                //Assert
-                val expected = (it > 0)
-                assert(expected)
-            }
-        }
+        val expected = (receiptRepository.takeOutVehicle(motorcycle) >= 0)
+
+        //Assert
+        assert(expected)
     }
 }

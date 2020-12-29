@@ -1,11 +1,11 @@
-package com.example.infrastructure.dblocal.dto
+package com.example.infrastructure.dblocal.dtos
 
 import com.example.domain.aggregate.Receipt
 import com.example.domain.entity.Car
 import com.example.domain.entity.Motorcycle
-import com.example.domain.valueobject.Vehicle
+import com.example.domain.enums.VehicleType
+import com.example.domain.entity.Vehicle
 import com.example.infrastructure.dblocal.entitys.ReceiptEntity
-import com.example.infrastructure.dblocal.enums.VehicleType
 
 fun Receipt.toReceiptEntity(): ReceiptEntity {
     var cc: Int? = null
