@@ -1,6 +1,7 @@
 package com.example.parkingapp.viewmodels
 
 import android.database.sqlite.SQLiteConstraintException
+import androidx.core.content.ContextCompat
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
+import kotlin.coroutines.coroutineContext
 
 class ReceiptViewModel @ViewModelInject constructor(
     private val receiptService: ReceiptService
