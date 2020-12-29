@@ -1,5 +1,6 @@
 package com.example.parkingapp.viewmodels
 
+import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -12,6 +13,8 @@ import com.example.domain.exception.CanNotEnterVehicleException
 import com.example.domain.exception.MaximumCantVehicleException
 import com.example.domain.service.ReceiptService
 import com.example.infrastructure.dblocal.utils.response.Resource
+import com.example.parkingapp.R
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -19,6 +22,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 
 class ReceiptViewModel @ViewModelInject constructor(
+    @ApplicationContext private val app: Context,
     private val receiptService: ReceiptService
 ) : ViewModel() {
 
@@ -31,9 +35,9 @@ class ReceiptViewModel @ViewModelInject constructor(
             .catch { exception ->
                 with(exception) {
                     val msg = when (this) {
-                        is SQLiteConstraintException -> "El vehiculo ya se encuentra en el parqueadero."
+                        is SQLiteConstraintException -> app.getString(R.string.vehicle_already_in_the_parking_lot)
                         is MaximumCantVehicleException, is CanNotEnterVehicleException -> message
-                        else -> "Oh oh ocurrio algo inesperado!"
+                        else -> app.getString(R.string.something_unexpected_happened)
                     }
                     emit(Resource.error(null, 0, msg))
                 }
@@ -52,7 +56,7 @@ class ReceiptViewModel @ViewModelInject constructor(
                 with(exception) {
                     val msg = when (this) {
                         is CalculateAmountException -> message
-                        else -> "Oh oh ocurrio algo inesperado!"
+                        else -> app.getString(R.string.something_unexpected_happened)
                     }
                     emit(Resource.error(null, 0, msg))
                 }
@@ -68,7 +72,7 @@ class ReceiptViewModel @ViewModelInject constructor(
         return flow
             .onStart { emit(Resource.loading(null, null)) }
             .catch {
-                emit(Resource.error(null, 0, "Oh oh ocurrio algo inesperado!"))
+                emit(Resource.error(null, 0, app.getString(R.string.something_unexpected_happened)))
             }
             .flowOn(Dispatchers.IO)
             .asLiveData()
