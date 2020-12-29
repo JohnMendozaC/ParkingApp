@@ -28,7 +28,7 @@
     <string name="amount_to_pay">El valor a pagar por el parqueo es de: %1$s</string>
     <string name="date_to">Fecha: %1$s</string>
     <string name="time_to">Hora: %1$s</string>
-    <string name="loading_db">\"Loading from database...\"</string>
+    <string name="loading_db">Loading from database…</string>
     <string name="vehicle_already_in_the_parking_lot">El vehiculo ya se encuentra en el parqueadero.</string>
-    <string name="something_unexpected_happened">\"Oh oh ocurrio algo inesperado!\"</string>
+    <string name="something_unexpected_happened">Oh oh ocurrio algo inesperado!</string>
 </resources>
