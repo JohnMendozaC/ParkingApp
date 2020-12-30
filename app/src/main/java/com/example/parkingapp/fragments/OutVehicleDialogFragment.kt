@@ -63,26 +63,26 @@ class OutVehicleDialogFragment : DialogFragment() {
             topAppBar.setNavigationOnClickListener {
                 dismiss()
             }
-            etDate.setOnClickListener {
+            etDateOut.setOnClickListener {
                 val c = Calendar.getInstance()
                 DatePickerDialog(
                     requireContext(),
                     DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-                        etDate.text = resources.getString(
+                        etDateOut.text = resources.getString(
                             R.string.date_to,
                             "${dayOfMonth}/${(monthOfYear + 1)}/${year}"
                         )
-                        etDate.tag = "${dayOfMonth}/${(monthOfYear + 1)}/${year}"
+                        etDateOut.tag = "${dayOfMonth}/${(monthOfYear + 1)}/${year}"
                     }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)
                 ).show()
             }
-            etTime.setOnClickListener {
+            etTimeOut.setOnClickListener {
                 val c = Calendar.getInstance()
                 TimePickerDialog(
                     requireContext(),
                     TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                        etTime.text = resources.getString(R.string.time_to, "$hourOfDay:$minute")
-                        etTime.tag = "$hourOfDay:$minute"
+                        etTimeOut.text = resources.getString(R.string.time_to, "$hourOfDay:$minute")
+                        etTimeOut.tag = "$hourOfDay:$minute"
                     },
                     c[Calendar.HOUR_OF_DAY],
                     c[Calendar.MINUTE],
@@ -94,7 +94,7 @@ class OutVehicleDialogFragment : DialogFragment() {
 
     private fun clicksProcessing() {
         with(binding) {
-            mbAddVehicle.setOnClickListener {
+            mbOutVehicle.setOnClickListener {
                 val resultValid = validData()
                 val receiptOut = arguments?.get("receipt") as Receipt
                 if (resultValid.first) {
@@ -115,7 +115,7 @@ class OutVehicleDialogFragment : DialogFragment() {
         val isValid: Boolean
         val date: Long
         with(binding) {
-            date = "${etDate.tag as String?} ${etTime.tag as String?}".getLongDate()
+            date = "${etDateOut.tag as String?} ${etTimeOut.tag as String?}".getLongDate()
             isValid = when {
                 (date <= 0) -> false
                 (date <= receipt?.entryDate ?: 0) -> false

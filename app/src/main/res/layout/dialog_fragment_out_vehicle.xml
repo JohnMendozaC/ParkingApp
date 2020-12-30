@@ -34,6 +34,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/view_out_vehicle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/margin_normal"
@@ -88,7 +89,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/receipt_item_date" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/et_date"
+                    android:id="@+id/et_date_out"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/vehicle_height"
                     android:layout_marginTop="@dimen/margin_normal"
@@ -100,7 +101,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_departure_time" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/et_time"
+                    android:id="@+id/et_time_out"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/vehicle_height"
                     android:layout_marginTop="@dimen/margin_normal"
@@ -109,17 +110,17 @@
                     android:hint="@string/enter_time"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_date" />
+                    app:layout_constraintTop_toBottomOf="@+id/et_date_out" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/mb_add_vehicle"
+                    android:id="@+id/mb_out_vehicle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_normal"
                     android:text="@string/pay_parking"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_time" />
+                    app:layout_constraintTop_toBottomOf="@+id/et_time_out" />
 
                 <include
                     android:id="@+id/loader_out_vehicle"

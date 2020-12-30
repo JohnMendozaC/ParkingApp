@@ -1,21 +1,24 @@
-package com.example.parkingapp
+package com.example.parkingapp.fragments
 
-import androidx.test.espresso.Espresso
+
+import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
+import com.example.parkingapp.MainActivity
+import com.example.parkingapp.R
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
 
 @HiltAndroidTest
+@RunWith(AndroidJUnit4::class)
 class VehicleListFragmentTest {
 
     private val hiltRule = HiltAndroidRule(this)
@@ -27,13 +30,14 @@ class VehicleListFragmentTest {
         .around(activityTestRule)
 
     @Test
-    fun clickAddVehicle() {
+    fun click_AddVehicle() {
         //Arrange
 
         //Act
-        Espresso.onView(withId(R.id.fab_add_vehicle)).perform(click())
+        onView(withId(R.id.fab_add_vehicle)).perform(click())
         //Assert
-        Espresso.onView(withId(R.id.view_add_vehicle))
+        onView(withId(R.id.view_add_vehicle))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
+
 }

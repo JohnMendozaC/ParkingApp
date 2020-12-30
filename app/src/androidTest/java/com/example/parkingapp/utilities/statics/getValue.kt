@@ -1,4 +1,4 @@
-package com.example.parkingapp.utilities
+package com.example.parkingapp.utilities.statics
 
 import androidx.lifecycle.LiveData
 import java.util.concurrent.CountDownLatch

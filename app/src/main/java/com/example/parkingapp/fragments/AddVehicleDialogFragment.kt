@@ -66,26 +66,26 @@ class AddVehicleDialogFragment : DialogFragment() {
             topAppBar.setNavigationOnClickListener {
                 dismiss()
             }
-            etDate.setOnClickListener {
+            etDateAdd.setOnClickListener {
                 val c = Calendar.getInstance()
                 DatePickerDialog(
                     requireContext(),
                     OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-                        etDate.text = resources.getString(
+                        etDateAdd.text = resources.getString(
                             R.string.date_to,
                             "${dayOfMonth}/${(monthOfYear + 1)}/${year}"
                         )
-                        etDate.tag = "${dayOfMonth}/${(monthOfYear + 1)}/${year}"
+                        etDateAdd.tag = "${dayOfMonth}/${(monthOfYear + 1)}/${year}"
                     }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)
                 ).show()
             }
-            etTime.setOnClickListener {
+            etTimeAdd.setOnClickListener {
                 val c = Calendar.getInstance()
                 TimePickerDialog(
                     requireContext(),
                     OnTimeSetListener { _, hourOfDay, minute ->
-                        etTime.text = resources.getString(R.string.time_to, "$hourOfDay:$minute")
-                        etTime.tag = "$hourOfDay:$minute"
+                        etTimeAdd.text = resources.getString(R.string.time_to, "$hourOfDay:$minute")
+                        etTimeAdd.tag = "$hourOfDay:$minute"
                     },
                     c[Calendar.HOUR_OF_DAY],
                     c[Calendar.MINUTE],
@@ -128,7 +128,7 @@ class AddVehicleDialogFragment : DialogFragment() {
         val isValid: Boolean
         val date: Long
         with(binding) {
-            date = "${etDate.tag as String?} ${etTime.tag as String?}".getLongDate()
+            date = "${etDateAdd.tag as String?} ${etTimeAdd.tag as String?}".getLongDate()
             isValid = when {
                 (date <= 0) -> false
                 (etPlate.text.toString().isEmpty()) -> false
