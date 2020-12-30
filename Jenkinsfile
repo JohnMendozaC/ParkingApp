@@ -37,6 +37,13 @@ pipeline {
 			}
 		}
 
+        stage('UI Tests') {
+            steps{
+                echo "------------>Unit Tests<------------"
+                    sh './gradlew app:connectedAndroidTest'
+            }
+        }
+
         stage('Static Code Analysis') {
             steps{
 				echo "------------>Static Code Analysis<------------"
